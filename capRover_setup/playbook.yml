@@ -1,0 +1,23 @@
+#################################################
+# CapRover - Allow UFW Ports
+#################################################
+---
+- hosts: all
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  tasks:
+# UFW Setup
+    - name: UFW - Allow capRover tcp ports
+      ufw:
+        rule: allow
+        port: "{{ tcp_ports }}"
+        proto: tcp
+
+    - name: UFW - Allow capRover udp ports
+      ufw:
+        rule: allow
+        port: "{{ udp_ports }}"
+        proto: udp
+
